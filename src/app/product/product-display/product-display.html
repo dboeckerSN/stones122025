@@ -4,4 +4,6 @@
   <li>Preis: {{ product().price }}</li>
   <li>Gewicht: {{ product().weight }}</li>
 </ul>
+<ng-content />
+
 <button type="button" (click)="increasePrice()">Preis erhöhen</button>
