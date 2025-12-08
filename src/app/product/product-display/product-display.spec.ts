@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductDisplay } from './product-display';
 import { Product } from '../product';
+import { By } from '@angular/platform-browser';
 
 describe('ProductDisplay', () => {
   let component: ProductDisplay;
@@ -31,5 +32,11 @@ describe('ProductDisplay', () => {
 
     // then
     expect(component.product().price).toBeCloseTo(oldPrice + 5);
+  });
+
+  it('should render name in DOM', () => {
+    const liName = fixture.debugElement.query(By.css('#name'));
+
+    expect(liName.nativeElement.textContent).includes(component.product().name);
   });
 });
