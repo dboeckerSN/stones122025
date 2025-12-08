@@ -14,7 +14,7 @@ describe('ProductDisplay', () => {
 
     fixture = TestBed.createComponent(ProductDisplay);
     component = fixture.componentInstance;
-    component.product = new Product(0, 'Grabstein Granit', 12.56, 32.45);
+    fixture.componentRef.setInput('product', new Product(0, 'Grabstein Granit', 12.56, 32.45));
     await fixture.whenStable();
   });
 
@@ -24,12 +24,12 @@ describe('ProductDisplay', () => {
 
   it('increasePrice should increase price by 5', () => {
     // given
-    const oldPrice = component.product.price;
+    const oldPrice = component.product().price;
 
     // when
     component.increasePrice();
 
     // then
-    expect(component.product.price).toBeCloseTo(oldPrice + 5);
+    expect(component.product().price).toBeCloseTo(oldPrice + 5);
   });
 });
