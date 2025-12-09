@@ -55,6 +55,10 @@ export class App {
     },
   ];
 
+  addProduct(product: Product) {
+    this.products.unshift(product);
+  }
+
   onPriceChange(price: number) {
     alert('Der neue Preis ist: ' + price);
   }
