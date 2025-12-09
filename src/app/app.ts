@@ -8,6 +8,7 @@ import { Product } from './product/product';
   styleUrl: './app.css',
 })
 export class App {
+  heute = new Date();
   protected readonly title = signal('stones');
   products: Product[] = [
     {
@@ -57,5 +58,4 @@ export class App {
   onPriceChange(price: number) {
     alert('Der neue Preis ist: ' + price);
   }
-
 }
