@@ -1,0 +1,5 @@
+@for(prod of products; track prod.id; let isOdd = $odd) {
+<mat-card [ngClass]="{ 'even-style': isOdd }">
+  <stn-product-display [product]="prod" (priceChange)="onPriceChange($event)" />
+</mat-card>
+}
