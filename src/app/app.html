@@ -1,6 +1,7 @@
+<mat-toolbar color="secondary"><span>Stones</span></mat-toolbar>
 {{ heute | date : 'fullDate' | uppercase }}
-@for(prod of products | slice:0:3; track prod.id; let isOdd = $odd) {
-<div [ngClass]="{ 'even-style': isOdd }">
+@for(prod of products; track prod.id; let isOdd = $odd) {
+<mat-card [ngClass]="{ 'even-style': isOdd }">
   <stn-product-display [product]="prod" (priceChange)="onPriceChange($event)" />
-</div>
+</mat-card>
 }
