@@ -1,4 +1,5 @@
-<stn-product-display [product]="productParent" (priceChange)="onPriceChange($event)">
-  <input type="number" #price />
-  <button type="button" (click)="changePrice(price.valueAsNumber)">Preis ändern</button>
-</stn-product-display>
+@for(prod of products; track prod.id; let isOdd = $odd) {
+<div [ngClass]="{ 'even-style': isOdd }">
+  <stn-product-display [product]="prod" (priceChange)="onPriceChange($event)" />
+</div>
+}
