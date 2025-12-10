@@ -1,16 +1,19 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Product } from '../product';
 import { CustomValidators } from '../../utils/validators/custom-validators';
 import { ActivatedRoute } from '@angular/router';
 import { ProductData } from '../product-data';
 import { map } from 'rxjs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'stn-product-form',
-  standalone: false,
   templateUrl: './product-form.html',
   styleUrl: './product-form.css',
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInput, MatButton],
 })
 export class ProductForm {
   productData = inject(ProductData);

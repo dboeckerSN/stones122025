@@ -3,16 +3,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductDisplay } from './product-display';
 import { Product } from '../product';
 import { By } from '@angular/platform-browser';
-import { UtilsModule } from '../../utils/utils-module';
 
 describe('ProductDisplay', () => {
   let component: ProductDisplay;
   let fixture: ComponentFixture<ProductDisplay>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [UtilsModule],
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(ProductDisplay);
     component = fixture.componentInstance;
