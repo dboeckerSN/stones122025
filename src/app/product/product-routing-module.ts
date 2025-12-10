@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductList } from './product-list/product-list';
 import { ProductForm } from './product-form/product-form';
-import { hasSavedGuard } from '../utils/has-saved-guard';
+import { hasSavedGuard } from '../utils/guards/has-saved-guard';
 
 const routes: Routes = [
   {
