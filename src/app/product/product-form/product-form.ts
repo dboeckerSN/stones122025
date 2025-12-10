@@ -1,8 +1,9 @@
-import { Component, inject, output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Product } from '../product';
 import { CustomValidators } from '../../utils/validators/custom-validators';
 import { ActivatedRoute } from '@angular/router';
+import { ProductData } from '../product-data';
 
 @Component({
   selector: 'stn-product-form',
@@ -11,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './product-form.css',
 })
 export class ProductForm {
-  saveProduct = output<Product>();
+  productData = inject(ProductData);
 
   // productForm = new FormGroup({
   // name: new FormControl('', [Validators.required, CustomValidators.alphaNum]),
@@ -25,11 +26,10 @@ export class ProductForm {
     price: [0, [Validators.required, CustomValidators.positiv]],
     weight: [0, [Validators.required]],
   });
-  private readonly route = inject(ActivatedRoute);
   id = -1;
 
   constructor() {
-    this.route.paramMap.subscribe((paramMap) => {
+    inject(ActivatedRoute).paramMap.subscribe((paramMap) => {
       const idParam = paramMap.get('id');
       if (idParam) {
         this.id = Number(idParam);
@@ -41,7 +41,7 @@ export class ProductForm {
     const formValue = this.productForm.value;
     if (this.productForm.valid && formValue.name && formValue.price && formValue.weight) {
       const product = new Product(this.id, formValue.name, formValue.price, formValue.weight);
-      this.saveProduct.emit(product);
+      this.productData.newProduct(product);
       this.productForm.reset();
     }
   }
