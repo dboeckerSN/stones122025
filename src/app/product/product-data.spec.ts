@@ -14,6 +14,7 @@ describe('ProductData', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
   it('"getList" should return product list', () => {
     // given + when + then
     expect(service.getList()[0].id).toBe(0);
