@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { Product } from './product/product';
 
 @Component({
   selector: 'stn-root',
@@ -15,6 +14,4 @@ export class App {
   /*addProduct(product: Product) {
     this.products.unshift(product);
   }*/
-
-  
 }

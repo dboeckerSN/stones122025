@@ -1,4 +1,4 @@
-@for(prod of products; track prod.id; let isOdd = $odd) {
+@for(prod of products | async; track prod.id; let isOdd = $odd) {
 <mat-card [ngClass]="{ 'even-style': isOdd }">
   <stn-product-display [product]="prod" (priceChange)="onPriceChange($event)" />
   <button type="button" [routerLink]="['/products/new', prod.id]">Gehe zu Produkt</button>

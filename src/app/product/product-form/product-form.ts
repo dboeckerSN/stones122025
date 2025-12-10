@@ -43,7 +43,7 @@ export class ProductForm {
       .pipe(map((value) => value?.split('').reverse().join('')))
       .subscribe((value) => (this.nameReserved = value ?? ''));
 
-      this.productForm.controls.name.valueChanges.subscribe((value) => {
+    this.productForm.controls.name.valueChanges.subscribe((value) => {
       this.nameLength = value ? value.length : 0;
     });
   }
@@ -51,8 +51,12 @@ export class ProductForm {
   save() {
     const formValue = this.productForm.value;
     if (this.productForm.valid && formValue.name && formValue.price && formValue.weight) {
-      const product = new Product(this.id, formValue.name, formValue.price, formValue.weight);
-      this.productData.newProduct(product);
+      const product: Partial<Product> = {
+        name: formValue.name,
+        price: formValue.price,
+        weight: formValue.weight,
+      };
+      this.productData.newProduct(product).subscribe();
       this.productForm.reset();
     }
   }
