@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'netto',
 })
 export class NettoPipe implements PipeTransform {
-  transform(price: number, tax = 19, type: 'brutto' | 'netto' = 'netto'): number {
+  transform(price: number, tax = 19, type: BruttoNetto = 'netto'): number {
     if (type === 'brutto') {
       return price * (1 + tax / 100);
     } else {
@@ -12,3 +12,5 @@ export class NettoPipe implements PipeTransform {
     }
   }
 }
+
+export type BruttoNetto = 'brutto' | 'netto';

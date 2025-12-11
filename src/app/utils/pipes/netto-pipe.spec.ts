@@ -1,4 +1,4 @@
-import { NettoPipe } from './netto-pipe';
+import { BruttoNetto, NettoPipe } from './netto-pipe';
 
 describe('NettoPipe', () => {
   const pipe = new NettoPipe();
@@ -19,6 +19,23 @@ describe('NettoPipe', () => {
     const tax = 10;
     expect(pipe.transform(price, tax, 'brutto')).toBeCloseTo(220);
   });
+
+  it.each([
+    [214, 7, undefined, 200],
+    [119, 19, undefined, 100],
+    [200, 10, 'brutto' as BruttoNetto, 220],
+    [119, undefined, undefined, 100],
+  ])(
+    'should calculate correctly for price: %s, tax: %s, type: %s, erwartetes Ergebnis: %s',
+    (
+      price: number,
+      tax: number | undefined,
+      type: BruttoNetto | undefined,
+      expectedValue: number
+    ) => {
+      expect(pipe.transform(price, tax, type)).toBeCloseTo(expectedValue);
+    }
+  );
 
   it('calculates netto with tax 19 if no tax and no type is passed', () => {
     const price = 119;
