@@ -22,7 +22,6 @@ import { ProductForm } from '../product-form/product-form';
     AsyncPipe,
     ProductDisplay,
     MatCard,
-    RouterLink,
     MatFormField,
     MatLabel,
     MatInput,

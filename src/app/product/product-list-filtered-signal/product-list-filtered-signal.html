@@ -1,0 +1,18 @@
+<mat-form-field>
+  <mat-label>Namen Filter</mat-label>
+  <input [(ngModel)]="nameFilterCtrl" matInput />
+</mat-form-field>
+
+<h4>Gesamtpreis: {{ totalPrice() | currency }}</h4>
+<stn-product-form (saveProduct)="onSaveProduct()" />
+@if(productResource.isLoading()) {
+<mat-progress-bar mode="indeterminate" />
+} @else {
+<div class="products">
+  @for(prod of productResource.value(); track prod.id; let isOdd = $odd) {
+  <mat-card [ngClass]="{ 'even-style': isOdd }">
+    <stn-product-display [product]="prod" />
+  </mat-card>
+  }
+</div>
+}

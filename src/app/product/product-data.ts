@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Signal } from '@angular/core';
 import { Product } from './product';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -59,7 +59,20 @@ export class ProductData {
   }
 
   getListFiltered(nameFilter: string): Observable<Product[]> {
-    return this.http.get<Product[]>(this.api, {params:{name: nameFilter}});
+    return this.http.get<Product[]>(this.api, { params: { name: nameFilter } });
+  }
+
+  getListFilteredResource(nameFilter: Signal<string>): HttpResourceRef<Product[]> {
+    return httpResource<Product[]>(
+      () => ({
+        url: this.api,
+        method: 'GET',
+        params: {
+          name: nameFilter(),
+        },
+      }),
+      { defaultValue: [] }
+    );
   }
 
   newProduct(product: Partial<Product>): Observable<void> {
@@ -68,7 +81,7 @@ export class ProductData {
 }
 
 export class MockProductData {
-   getList(): Observable<Product[]> {
+  getList(): Observable<Product[]> {
     return of([
       {
         id: -1,

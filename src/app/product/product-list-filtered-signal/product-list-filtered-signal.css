@@ -1,0 +1,13 @@
+.products {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.even-style {
+  background-color: lightgray;
+}
+
+mat-card {
+  width: 350px;
+  margin-bottom: 4px;
+}
