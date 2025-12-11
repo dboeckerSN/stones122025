@@ -1,6 +1,7 @@
 <mat-toolbar color="secondary"
   ><span>Stones</span><a [routerLink]="['/products']">Produktliste</a
-  ><a [routerLink]="['/products/new']">Produkt anlegen</a></mat-toolbar
+  ><a [routerLink]="['/products/new']">Produkt anlegen</a
+  ><a [routerLink]="['/products/filtered']">ProduktListe Gefiltert</a></mat-toolbar
 >
 {{ heute | date : 'fullDate' | uppercase }}
 <router-outlet />

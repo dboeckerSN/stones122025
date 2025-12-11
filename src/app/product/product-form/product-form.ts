@@ -1,4 +1,4 @@
-import { Component, inject, input, numberAttribute } from '@angular/core';
+import { Component, inject, input, numberAttribute, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Product } from '../product';
 import { CustomValidators } from '../../utils/validators/custom-validators';
@@ -15,6 +15,7 @@ import { MatButton } from '@angular/material/button';
   imports: [ReactiveFormsModule, MatFormFieldModule, MatInput, MatButton],
 })
 export class ProductForm {
+  saveProduct = output<void>();
   productData = inject(ProductData);
 
   // productForm = new FormGroup({
@@ -51,7 +52,7 @@ export class ProductForm {
         price: formValue.price,
         weight: formValue.weight,
       };
-      this.productData.newProduct(product).subscribe();
+      this.productData.newProduct(product).subscribe(() => this.saveProduct.emit());
       this.productForm.reset();
     }
   }

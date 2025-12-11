@@ -58,6 +58,10 @@ export class ProductData {
     return this.http.get<Product[]>(this.api);
   }
 
+  getListFiltered(nameFilter: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.api, {params:{name: nameFilter}});
+  }
+
   newProduct(product: Partial<Product>): Observable<void> {
     return this.http.post<void>(this.api, product);
   }
