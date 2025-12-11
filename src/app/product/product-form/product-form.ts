@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input, numberAttribute } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Product } from '../product';
 import { CustomValidators } from '../../utils/validators/custom-validators';
-import { ActivatedRoute } from '@angular/router';
 import { ProductData } from '../product-data';
 import { map } from 'rxjs';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,18 +29,11 @@ export class ProductForm {
     price: [0, [Validators.required, CustomValidators.positiv]],
     weight: [0, [Validators.required]],
   });
-  id = -1;
+  id = input(-1, { transform: (value: unknown) => numberAttribute(value, -1) });
   nameReserved = '';
   nameLength = 0;
 
   constructor() {
-    inject(ActivatedRoute).paramMap.subscribe((paramMap) => {
-      const idParam = paramMap.get('id');
-      if (idParam) {
-        this.id = Number(idParam);
-      }
-    });
-
     this.productForm.controls.name.valueChanges
       .pipe(map((value) => value?.split('').reverse().join('')))
       .subscribe((value) => (this.nameReserved = value ?? ''));
